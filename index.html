@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Course Management</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      padding: 30px;
+    }
+    .course {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .msg {
+      display: none;
+      margin-top: 20px;
+      padding: 10px;
+      background: #dff0d8;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Student Course Management System</h1>
+<p>View and enroll in available courses</p>
+
+<div class="course">
+  <h3>Java Full Stack</h3>
+  <p>Instructor: John Doe</p>
+  <p>Duration: 12 weeks</p>
+  <button onclick="enroll('Java Full Stack')">Enroll</button>
+</div>
+
+<div class="course">
+  <h3>React Basics</h3>
+  <p>Instructor: Jane Smith</p>
+  <p>Duration: 6 weeks</p>
+  <button onclick="enroll('React Basics')">Enroll</button>
+</div>
+
+<div id="message" class="msg"></div>
+
+<script>
+  function enroll(course) {
+    var name = prompt("Enter your name:");
+    if (name) {
+      document.getElementById("message").style.display = "block";
+      document.getElementById("message").innerText =
+        name + " enrolled successfully in " + course;
+    }
+  }
+</script>
+
+</body>
+</html>
 
