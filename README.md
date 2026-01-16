@@ -14,7 +14,7 @@ A simple full-stack project that allows admins to manage courses and students to
 - HTML, JavaScript
 
 ## Live Demo
-https://yourusername.github.io/student-course-management/
+(https://renuka24-rp.github.io/student-course-management/)
 
 Note: Backend APIs are implemented in Spring Boot and documented in this repository.
 
