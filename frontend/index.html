@@ -2,73 +2,134 @@
 <html>
 <head>
     <title>Student Course Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
-            font-family: Arial;
-            background-color: #f4f4f4;
-            padding: 40px;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
         }
-        h1 {
+
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background: #2f3640;
+            color: white;
+            position: fixed;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
             text-align: center;
         }
-        .container {
-            width: 400px;
-            margin: auto;
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background: #40739e;
+        }
+
+        .main {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .card {
             background: white;
             padding: 20px;
             border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
+
         input, button {
-            width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin: 5px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
+
         button {
-            background-color: #4CAF50;
+            background: #44bd32;
             color: white;
             border: none;
             cursor: pointer;
         }
-        ul {
-            padding: 0;
-            list-style: none;
+
+        button:hover {
+            background: #2ecc71;
         }
-        li {
-            background: #eee;
+
+        .course-card {
+            background: #ecf0f1;
+            padding: 10px;
             margin: 5px 0;
-            padding: 5px;
+            border-radius: 5px;
         }
     </style>
 </head>
+
 <body>
 
-<h1>Student Course Management</h1>
+<div class="sidebar">
+    <h2>Dashboard</h2>
+    <a href="#">Overview</a>
+    <a href="#">Courses</a>
+    <a href="#">Enrollments</a>
+</div>
 
-<div class="container">
-    <h3>Add Course</h3>
-    <input type="text" id="title" placeholder="Course Title">
-    <input type="text" id="description" placeholder="Course Description">
-    <button onclick="addCourse()">Add Course</button>
+<div class="main">
 
-    <h3>All Courses</h3>
-    <ul id="courseList"></ul>
+    <h1>Student Course Management</h1>
+
+    <div class="card">
+        <h3>Add New Course</h3>
+        <input type="text" id="title" placeholder="Course Title">
+        <input type="text" id="description" placeholder="Course Description">
+        <button onclick="addCourse()">Add Course</button>
+    </div>
+
+    <div class="card">
+        <h3>All Courses</h3>
+        <div id="courseList"></div>
+    </div>
+
 </div>
 
 <script>
 
-const API_URL = "https://student-course-management-tp4v.onrender.com";
+const API_URL = "https://student-course-management-tp4v.onrender.com"; // your backend
 
 async function addCourse() {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
 
-    await fetch(`${API_URL}/courses`, {
+    if (!title || !description) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    const response = await fetch(`${API_URL}/courses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description })
     });
 
-    loadCourses();
+    if(response.ok){
+        alert("Course Added Successfully");
+        loadCourses();
+    } else {
+        alert("Error adding course");
+    }
 }
 
 async function loadCourses() {
@@ -79,9 +140,10 @@ async function loadCourses() {
     list.innerHTML = "";
 
     courses.forEach(course => {
-        const li = document.createElement("li");
-        li.innerText = course.title + " - " + course.description;
-        list.appendChild(li);
+        const div = document.createElement("div");
+        div.className = "course-card";
+        div.innerHTML = `<b>${course.title}</b><br>${course.description}`;
+        list.appendChild(div);
     });
 }
 
