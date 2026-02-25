@@ -7,148 +7,118 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f6fa;
-        }
-
-        .sidebar {
-            width: 220px;
-            height: 100vh;
-            background: #2f3640;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            position: fixed;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .sidebar h2 {
+        header {
             text-align: center;
+            padding: 60px 20px;
+            animation: fadeDown 1s ease-in-out;
         }
 
-        .sidebar a {
-            display: block;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            margin-top: 10px;
-            border-radius: 5px;
+        header h1 {
+            font-size: 40px;
         }
 
-        .sidebar a:hover {
-            background: #40739e;
-        }
-
-        .main {
-            margin-left: 240px;
-            padding: 30px;
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px;
         }
 
         .card {
             background: white;
+            color: black;
+            width: 280px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeUp 0.8s forwards;
         }
 
-        input, button {
-            padding: 10px;
-            margin: 5px 0;
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+
+        .card h3 {
+            margin-top: 0;
         }
 
-        button {
-            background: #44bd32;
-            color: white;
+        .back-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 12px 25px;
+            background: white;
+            color: #764ba2;
             border: none;
+            border-radius: 25px;
             cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        button:hover {
-            background: #2ecc71;
+        .back-btn:hover {
+            background: #eee;
+            transform: scale(1.05);
         }
 
-        .course-card {
-            background: #ecf0f1;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
+        @keyframes fadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                transform: translateY(-40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-    <h2>Dashboard</h2>
-    <a href="#">Overview</a>
-    <a href="#">Courses</a>
-    <a href="#">Enrollments</a>
-</div>
-
-<div class="main">
-
+<header>
     <h1>Student Course Management</h1>
+    <p>Explore available courses with a modern UI experience</p>
+</header>
 
+<div class="container">
     <div class="card">
-        <h3>Add New Course</h3>
-        <input type="text" id="title" placeholder="Course Title">
-        <input type="text" id="description" placeholder="Course Description">
-        <button onclick="addCourse()">Add Course</button>
+        <h3>Full Stack Development</h3>
+        <p>Learn frontend and backend technologies.</p>
     </div>
 
     <div class="card">
-        <h3>All Courses</h3>
-        <div id="courseList"></div>
+        <h3>Data Structures</h3>
+        <p>Master algorithms and problem-solving skills.</p>
     </div>
 
+    <div class="card">
+        <h3>Cloud Computing</h3>
+        <p>Understand AWS, Azure and deployment strategies.</p>
+    </div>
 </div>
+
+<button class="back-btn" onclick="goBack()">Back to Job Portal</button>
 
 <script>
-
-const API_URL = "https://student-course-management-tp4v.onrender.com"; // your backend
-
-async function addCourse() {
-    const title = document.getElementById("title").value;
-    const description = document.getElementById("description").value;
-
-    if (!title || !description) {
-        alert("Please fill all fields");
-        return;
-    }
-
-    const response = await fetch(`${API_URL}/courses`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, description })
-    });
-
-    if(response.ok){
-        alert("Course Added Successfully");
-        loadCourses();
-    } else {
-        alert("Error adding course");
-    }
+function goBack() {
+    window.location.href = "https://your-job-portal-url.onrender.com";
 }
-
-async function loadCourses() {
-    const response = await fetch(`${API_URL}/courses`);
-    const courses = await response.json();
-
-    const list = document.getElementById("courseList");
-    list.innerHTML = "";
-
-    courses.forEach(course => {
-        const div = document.createElement("div");
-        div.className = "course-card";
-        div.innerHTML = `<b>${course.title}</b><br>${course.description}`;
-        list.appendChild(div);
-    });
-}
-
-loadCourses();
-
 </script>
 
 </body>
