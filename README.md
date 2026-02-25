@@ -1,50 +1,36 @@
 Student Course Management System
 
-A web-based course management application that allows users to create and view courses through a clean and responsive interface.
+A modern animated course dashboard designed as an independent module and linked from the SmartHire Job Portal.
 
-This project is designed as a modular system and is deployed independently. It is linked from the Job Portal project to demonstrate multi-project architecture and deployment capability.
+This project demonstrates frontend design capabilities and modular deployment architecture.
 
 🚀 Features
 
-Add new courses
+Animated modern UI
 
-View all available courses
+Responsive layout
 
-REST API integration
+Smooth navigation
 
-Responsive dashboard UI
+Integrated navigation back to SmartHire
 
-Cross-project navigation (linked from Job Portal)
-
-Deployed on Render
-
-🛠 Tech Stack
-Frontend
-
-HTML
-
-CSS
-
-JavaScript
-
-Fetch API
-
-Backend
-
-Node.js
-
-Express.js
-
-Database
-
-PostgreSQL (Render Hosted)
-
-Deployment
-
-Render (Web Service + Static Site)
+Cloud deployment using Render
 
 🌐 Live Demo
 
-Student Course Management:
-👉 [https://your-student-course-render-url.onrender.com](https://student-course-management-tp4v.onrender.com/)
+👉 https://student-course-management-frontend.onrender.com/
 
+Linked from:
+👉 https://smart-job-portal-new.onrender.com/
+
+🎯 Purpose
+
+This project demonstrates:
+
+Multi-project linking
+
+UI design skills
+
+Deployment on cloud platforms
+
+Modular product thinking
