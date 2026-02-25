@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Course Management</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            background: #eee;
+            margin: 5px 0;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Student Course Management</h1>
+
+<div class="container">
+    <h3>Add Course</h3>
+    <input type="text" id="title" placeholder="Course Title">
+    <input type="text" id="description" placeholder="Course Description">
+    <button onclick="addCourse()">Add Course</button>
+
+    <h3>All Courses</h3>
+    <ul id="courseList"></ul>
+</div>
+
+<script>
+
+const API_URL = "https://your-backend-url.onrender.com";  // 🔴 REPLACE AFTER DEPLOY
+
+async function addCourse() {
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+
+    await fetch(`${API_URL}/courses`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description })
+    });
+
+    loadCourses();
+}
+
+async function loadCourses() {
+    const response = await fetch(`${API_URL}/courses`);
+    const courses = await response.json();
+
+    const list = document.getElementById("courseList");
+    list.innerHTML = "";
+
+    courses.forEach(course => {
+        const li = document.createElement("li");
+        li.innerText = course.title + " - " + course.description;
+        list.appendChild(li);
+    });
+}
+
+loadCourses();
+
+</script>
+
+</body>
+</html>
