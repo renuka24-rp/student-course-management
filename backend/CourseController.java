@@ -1,9 +1,11 @@
-import java.util.List;
+package com.renuka.studentcourse;
+
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/courses")
-@CrossOrigin("*")
+@CrossOrigin
 public class CourseController {
 
     private final CourseService courseService;
@@ -14,7 +16,7 @@ public class CourseController {
 
     @PostMapping
     public Course addCourse(@RequestBody Course course) {
-        return courseService.addCourse(course);
+        return courseService.saveCourse(course);
     }
 
     @GetMapping
@@ -22,4 +24,3 @@ public class CourseController {
         return courseService.getAllCourses();
     }
 }
-
