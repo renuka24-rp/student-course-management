@@ -46,7 +46,5 @@ Render (Web Service + Static Site)
 🌐 Live Demo
 
 Student Course Management:
-👉 https://your-student-course-render-url.onrender.com
+👉 [https://your-student-course-render-url.onrender.com](https://student-course-management-tp4v.onrender.com/)
 
-Linked from:
-👉 https://your-job-portal-render-url.onrender.com
