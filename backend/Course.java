@@ -1,3 +1,5 @@
+package com.renuka.studentcourse;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,20 +9,21 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String courseName;
-    private String instructor;
-    private int durationWeeks;
+    private String title;
+    private String description;
+
+    public Course() {}
+
+    public Course(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 
     public Long getId() { return id; }
+    public String getTitle() { return title; }
+    public String getDescription() { return description; }
+
     public void setId(Long id) { this.id = id; }
-
-    public String getCourseName() { return courseName; }
-    public void setCourseName(String courseName) { this.courseName = courseName; }
-
-    public String getInstructor() { return instructor; }
-    public void setInstructor(String instructor) { this.instructor = instructor; }
-
-    public int getDurationWeeks() { return durationWeeks; }
-    public void setDurationWeeks(int durationWeeks) { this.durationWeeks = durationWeeks; }
+    public void setTitle(String title) { this.title = title; }
+    public void setDescription(String description) { this.description = description; }
 }
-
